@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import Login from './components/Login.jsx';
 import Profile from './components/Profile.jsx';
 import Creator from './components/Creator.jsx';
+import DrinkSearch from './components/DrinkSearch.jsx';
 import {BrowserRouter as Router, Route, Switch, useParams, Link} from "react-router-dom";
 
 
 class App extends React.Component {
-
 
     constructor(props) {
         super(props);
@@ -21,7 +21,6 @@ class App extends React.Component {
 
         this.validateUser = this.validateUser.bind(this);
     }
-
 
     validateUser(event){
         event.preventDefault();
@@ -78,6 +77,9 @@ class App extends React.Component {
                         </Route>
                         <Route path="/creator">
                             <Creator/>
+                        </Route>
+                        <Route path="/search">
+                            <DrinkSearch/>
                         </Route>
                     </Switch>
                             <div className={'footer'}></div>

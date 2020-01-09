@@ -104,7 +104,7 @@ body {
     justify-content: space-evenly;
 }
 
-.profile-viewer{
+.viewer{
     display: flex;
     flex-direction: column;
     font-family: 'Play', sans-serif;
@@ -117,7 +117,7 @@ body {
     border-radius: 6px;
 }
 
-.profile-card{
+.card{
     display: flex;
     position: absolute;
     top: 40px;
@@ -126,11 +126,12 @@ body {
     background-color: #05c1fd;
 }
 
-.drink-list{
+.list{
     display: flex;
     flex-direction: column;
-    width: 220px;
+    min-width: 220px;
     height: 100%;
+    z-index: 10;
     background-color: white;
     box-shadow: 1px 0 2px black;
 }
@@ -147,12 +148,51 @@ body {
     margin-left: 20px;
 }
 
-.user-info{
+.drink-details-viewer {
+    display: flex;
+    flex-direction: column;
+    background-color: coral;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+}
+
+.search-option {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+    background-color: white;
+    height: 64px;
+    width: 100%;
+}
+
+.search-option:hover{
+    filter: sepia(30%);
+    transform: translateX(12px);
+    transition-duration: .3s;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 2px black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.search-option-name{
+    margin-left: 20px;
+}
+
+.alphabetical{
+
+}
+
+
+.info-bar{
     display: flex;
     height: 40px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     background-color: gray;
+    border-bottom: solid 1px black;
     z-index: 20;
 }
 
@@ -224,3 +264,38 @@ body {
     background-repeat: no-repeat;
 }
 
+#btn-by-name{
+    background-image: url('./img/png/008-cocktails-32.png');
+    height: 32px;
+    width: 32px;
+    margin-left: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#btn-by-category{
+    background-image: url('./img/png/019-cocktails-21.png');
+    height: 32px;
+    width: 32px;
+    margin-left: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#btn-by-glassware{
+    background-image: url('./img/png/023-cocktails-17.png');
+    height: 32px;
+    width: 32px;
+    margin-left: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#btn-by-ingredients{
+    background-image: url('./img/png/035-cocktails-5.png');
+    height: 32px;
+    width: 32px;
+    margin-left: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
