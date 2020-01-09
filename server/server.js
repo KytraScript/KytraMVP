@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.static('./public'));
 
 app.get('/drinkNames', async (req, res) => {
-    axios.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink')
+    axios.get('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?c=Ordinary_Drink')
         .then(function (response) {
             res.send(response.data)
         })
@@ -18,7 +18,7 @@ app.get('/drinkNames', async (req, res) => {
 });
 
 app.get('/getCategories', async (req, res) => {
-    axios.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list', {headers: {
+    axios.get('https://www.thecocktaildb.com/api/json/v2/9973533/list.php?c=list', {headers: {
         'Content-Type': 'application/json'}
     })
         .then(function (response) {
@@ -30,7 +30,7 @@ app.get('/getCategories', async (req, res) => {
 });
 
 app.get('/getIngredients', async (req, res) => {
-    axios.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list', {headers: {
+    axios.get('https://www.thecocktaildb.com/api/json/v2/9973533/list.php?i=list', {headers: {
             'Content-Type': 'application/json'}
     })
         .then(function (response) {
@@ -42,7 +42,7 @@ app.get('/getIngredients', async (req, res) => {
 });
 
 app.get('/getGlassware', async (req, res) => {
-    axios.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?g=list', {headers: {
+    axios.get('https://www.thecocktaildb.com/api/json/v2/9973533/list.php?g=list', {headers: {
             'Content-Type': 'application/json'}
     })
         .then(function (response) {

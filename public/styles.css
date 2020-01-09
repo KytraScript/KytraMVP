@@ -151,10 +151,48 @@ body {
 .drink-details-viewer {
     display: flex;
     flex-direction: column;
-    background-color: coral;
+    background-color: #18d68c;
     z-index: 1;
     height: 100%;
     width: 100%;
+}
+
+.data-points{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    overflow-x: hidden;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.result-card{
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    letter-spacing: .12em;
+    width: 80%;
+    height: 30px;
+    min-height: 30px;
+    padding: 4px 10px 4px 10px;
+    margin-top: 3px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+.result-card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 3px black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.result-info{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .search-option {
