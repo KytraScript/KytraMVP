@@ -94,6 +94,19 @@ app.post('/findByIngredient', async (req, res) => {
         });
 });
 
+app.post('/findByID', async (req, res) => {
+    let term = req.body.query;
+    axios.get(`https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=${term}`, {headers: {
+            'Content-Type': 'application/json'}
+    })
+        .then(function (response) {
+            res.send(response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+});
+
 app.listen(5170, function () {
     console.log('listening on port 5170!');
 });

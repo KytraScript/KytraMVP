@@ -13,7 +13,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            currentSession: true,
+            currentSession: null,
             userValue: '',
             currentUser: 'Kytra',
             userCreatedDrinks: {},

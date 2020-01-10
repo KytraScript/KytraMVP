@@ -1,6 +1,7 @@
 import React from 'react';
 import ResultCard from './ResultCard.jsx';
 import DrinkCard from './DrinkCard.jsx';
+import InstructionCard from './InstructionCard.jsx'
 import axios from "axios";
 
 class SearchDisplay extends React.Component {
@@ -9,7 +10,8 @@ class SearchDisplay extends React.Component {
         super(props);
 
         this.state = {
-            queryResults: []
+            queryResults: [],
+            currentDrink: [],
         };
 
         this.createQueryString = this.createQueryString.bind(this);
@@ -37,6 +39,7 @@ class SearchDisplay extends React.Component {
             query: textQuery
         })
             .then(function (response) {
+                console.log(response.data);
                 self.setState({
                     queryResults: response.data.drinks
                 })
@@ -73,9 +76,33 @@ class SearchDisplay extends React.Component {
             query: textQuery
         })
             .then(function (response) {
+                if(typeof(response.data.drinks) === 'string'){
+                    self.setState({
+                        queryResults: [{'strDrink':`No Drink Found: ${textQuery}`, 'strDrinkThumb':'./img/sadgurl.jpg', 'idDrink':'zero0'}]
+                    })
+                } else {
+                    self.setState({
+                        queryResults: response.data.drinks
+                    })
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    drinkIDQuery(event){
+        event.preventDefault();
+        let self = this;
+        let idQuery = event.currentTarget.id;
+        axios.post('http://localhost:5170/findByID', {
+            query: idQuery
+        })
+            .then(function (response) {
                 self.setState({
-                    queryResults: response.data.drinks
+                    currentDrink: response.data.drinks[0]
                 })
+                console.log(self.state.currentDrink)
             })
             .catch(function (error) {
                 console.log(error);
@@ -83,7 +110,7 @@ class SearchDisplay extends React.Component {
     }
 
     render() {
-        if (this.state.queryResults.length === 0) {
+        if (this.state.queryResults.length === 0 && !this.state.currentDrink.idDrink) {
             return (
                 <div className={'data-points'}>
                     {this.props.dataFocus.map((e, index) => {
@@ -97,14 +124,20 @@ class SearchDisplay extends React.Component {
                     })}
                 </div>
             )
-        } else {
+        } else if (this.state.queryResults.length > 0 && !this.state.currentDrink.idDrink){
             return (
                 <div className={'data-points-drinks'}>
                     {this.state.queryResults.map((e, index) => {
-                        return <DrinkCard drink={e} key={index}/>
+                        return <DrinkCard drink={e} key={index} query={this.drinkIDQuery.bind(this)}/>
                     })}
                 </div>
             )
+        } else if (this.state.currentDrink.idDrink){
+           return (
+               <div className={'data-points'}>
+                <InstructionCard drink={this.state.currentDrink}/>
+            </div>
+           )
         }
     }
 }
