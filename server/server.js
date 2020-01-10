@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('./public'));
 
-mongoose.connect('mongodb+srv://gammazon:ibaraki5647@cluster0-jxvpd.mongodb.net/test?retryWrites=true&w=majority', {
+/*mongoose.connect('mongodb+srv://gammazon:ibaraki5647@cluster0-jxvpd.mongodb.net/test?retryWrites=true&w=majority', {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -19,7 +19,7 @@ mongoose.connect('mongodb+srv://gammazon:ibaraki5647@cluster0-jxvpd.mongodb.net/
     .then( () => {
         console.log('CONNECTED TO MONGO, MISS KYTRA.. PREPARED TO JSON FOR YOU!')
     })
-    .catch( e => console.log(e));
+    .catch( e => console.log(e));*/
 
 app.get('/drinkNames', async (req, res) => {
     axios.get('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?c=Ordinary_Drink')
