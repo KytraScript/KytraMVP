@@ -127,7 +127,7 @@ class DrinkSearch extends React.Component {
                             </div>
                         </div>
                         <div className={'drink-details-viewer'}>
-                            <SearchDisplay dataFocus={this.state.dataFocus}/>
+                            <SearchDisplay dataFocus={this.state.dataFocus} addFavorite={this.props.addFavorite}/>
                         </div>
                     </div>
                 </div>

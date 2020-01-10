@@ -135,7 +135,7 @@ class SearchDisplay extends React.Component {
         } else if (this.state.currentDrink.idDrink){
            return (
                <div className={'data-points'}>
-                <InstructionCard drink={this.state.currentDrink}/>
+                <InstructionCard drink={this.state.currentDrink} addFavorite={this.props.addFavorite}/>
             </div>
            )
         }

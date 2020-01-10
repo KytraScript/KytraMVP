@@ -45,7 +45,7 @@ const InstructionCard = (props) => {
                         return <Ingredients name={e} measure={allMeasurements[count]} key={index}/>
                     })}
                 </div>
-                <div id={'btn-add-fav'}>Add To Favorites</div>
+                <div id={'btn-add-fav'} onClick={props.addFavorite}>Add To Favorites</div>
             </div>
         </div>
     )
