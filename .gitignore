@@ -10,6 +10,8 @@ node_modules/
 db/connection.js
 public/bundle.js
 public/image-feature-bundle.js
+digital-ocean-key
+digital-ocean-key.pub
 
 pids
 *.pid
