@@ -12,6 +12,8 @@ public/bundle.js
 public/image-feature-bundle.js
 digital-ocean-key
 digital-ocean-key.pub
+server/env
+server/env/API_KEY.js
 
 pids
 *.pid

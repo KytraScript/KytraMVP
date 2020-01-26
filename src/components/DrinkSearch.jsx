@@ -8,99 +8,137 @@ class DrinkSearch extends React.Component {
         super(props);
 
         this.state = {
-            drinkCategories: {},
-            drinkNames: {},
-            drinkIngredients: {},
-            drinkGlassware: {},
+            drinkCategories: [],
+            drinkNames: [],
+            drinkIngredients: [],
+            drinkGlassware: [],
             dataFocus: [],
+            isDrinkInFocus: false
         };
     }
 
-    getNames(letter){
-        let self = this;
-        axios.get('http://localhost:5170/getNames')
-            .then( function (response) {
-                self.setState({
-                    drinkNames: response.data.drinks
-                })
-            })
-            .then( () => {
-                console.log(this.state.drinkNames);
-            })
-            .then( () => {
-                self.setState({
-                    dataFocus: this.state.drinkNames
-                })
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    getNames() {
+
+        this.clearDrinkFocus();
+
+        let alpha = [
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+            'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+        ];
+        let alphaArr = [];
+        alpha.forEach(e => {
+            alphaArr.push({letter: true, value: e});
+        });
+        this.setState({
+            dataFocus: alphaArr
+        });
     }
 
-    getCategory(){
-        let self = this;
-        axios.get('http://localhost:5170/getCategories')
-            .then( function (response) {
+    getCategory() {
+
+        this.clearDrinkFocus();
+
+        if (this.state.drinkCategories.length) {
+            this.setState({
+                dataFocus: this.state.drinkCategories
+            });
+        } else {
+            let self = this;
+            axios.get('http://localhost:5170/getCategories')
+                .then(function (response) {
                     self.setState({
                         drinkCategories: response.data.drinks
-                    })
+                    });
                 })
-            .then( () => {
-                console.log(this.state.drinkCategories);
-            })
-            .then( () => {
-                self.setState({
-                    dataFocus: this.state.drinkCategories
+                .then(() => {
+                    console.log(this.state.drinkCategories);
                 })
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .then(() => {
+                    self.setState({
+                        dataFocus: this.state.drinkCategories
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
 
-    getIngredients(){
-        let self = this;
-        axios.get('http://localhost:5170/getIngredients')
-            .then( function (response) {
-                self.setState({
-                    drinkIngredients: response.data.drinks
-                })
-            })
-            .then( () => {
-                console.log(this.state.drinkIngredients);
-            })
-            .then( () => {
-                self.setState({
-                    dataFocus: this.state.drinkIngredients
-                })
-            })
-            .catch(function (error) {
-                console.log(error);
+    getIngredients() {
+
+        this.clearDrinkFocus();
+
+        if (this.state.drinkIngredients.length) {
+            this.setState({
+                dataFocus: this.state.drinkIngredients
             });
+        } else {
+            let self = this;
+            axios.get('http://localhost:5170/getIngredients')
+                .then(function (response) {
+                    self.setState({
+                        drinkIngredients: response.data.drinks
+                    });
+                })
+                .then(() => {
+                    console.log(this.state.drinkIngredients);
+                })
+                .then(() => {
+                    self.setState({
+                        dataFocus: this.state.drinkIngredients
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
 
-    getGlassware(){
-        let self = this;
-        axios.get('http://localhost:5170/getGlassware')
-            .then( function (response) {
-                self.setState({
-                    drinkGlassware: response.data.drinks
-                })
-            })
-            .then( () => {
-                console.log(this.state.drinkGlassware);
-            })
-            .then( () => {
-                self.setState({
-                    dataFocus: this.state.drinkGlassware
-                })
-            })
-            .catch(function (error) {
-                console.log(error);
+    getGlassware() {
+
+        this.clearDrinkFocus();
+
+        if (this.state.drinkGlassware.length) {
+            this.setState({
+                dataFocus: this.state.drinkGlassware
             });
+        } else {
+            let self = this;
+            axios.get('http://localhost:5170/getGlassware')
+                .then(function (response) {
+                    self.setState({
+                        drinkGlassware: response.data.drinks
+                    });
+                })
+                .then(() => {
+                    console.log(this.state.drinkGlassware);
+                })
+                .then(() => {
+                    self.setState({
+                        dataFocus: this.state.drinkGlassware
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
 
+    isDrinkInFocus() {
+        if (!this.state.isDrinkInFocus) {
+            this.setState({
+                isDrinkInFocus: true
+            });
+        }
+    }
 
+    clearDrinkFocus() {
+        if (this.state.isDrinkInFocus) {
+            this.setState({
+                isDrinkInFocus: false
+            });
+        }
+    }
 
     render() {
         return (
@@ -111,7 +149,7 @@ class DrinkSearch extends React.Component {
                         <div className={'list'}>
                             <div className={'search-option'} onClick={this.getNames.bind(this)}>
                                 <div id={'btn-by-name'}></div>
-                                <div className={'search-option-name'}>By Name</div>
+                                <div className={'search-option-name'}>By First Letter</div>
                             </div>
                             <div className={'search-option'} onClick={this.getCategory.bind(this)}>
                                 <div id={'btn-by-category'}></div>
@@ -127,12 +165,12 @@ class DrinkSearch extends React.Component {
                             </div>
                         </div>
                         <div className={'drink-details-viewer'}>
-                            <SearchDisplay dataFocus={this.state.dataFocus} addFavorite={this.props.addFavorite}/>
+                            <SearchDisplay dataFocus={this.state.dataFocus} showDrink={this.state.isDrinkInFocus} isDrinkInFocus={this.isDrinkInFocus.bind(this)} addFavorite={this.props.addFavorite}/>
                         </div>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
